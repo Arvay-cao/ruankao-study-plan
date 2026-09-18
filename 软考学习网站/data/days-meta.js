@@ -1,0 +1,76 @@
+// 执行表全部学习日元数据（来源：《2026软件设计师八周学习执行表.xlsx》每日计划）
+// done: 执行表中标记"已完成"的历史日期（8/26—9/16）
+window.DAYS_META = [
+  // 第1周 诊断与基础重建
+  { date: '2026-08-26', weekday: '周三', week: '第1周', phase: '诊断与基础重建', topic: '摸底·上午卷', task: '完成一套近年真题的上午卷；严格记录每道错题所属考点，不查资料。', hours: 2, done: true, output: '上午摸底分数＋首批错题' },
+  { date: '2026-08-27', weekday: '周四', week: '第1周', phase: '诊断与基础重建', topic: '摸底·下午卷', task: '完成同套真题下午卷；Java选做题固定选择Java；按规范术语作答。', hours: 2, done: true, output: '下午摸底分数＋弱项排序' },
+  { date: '2026-08-28', weekday: '周五', week: '第1周', phase: '诊断与基础重建', topic: '数据表示与校验', task: '复习进制、补码、浮点数、奇偶校验与海明码；完成25道选择题。', hours: 2, done: true, output: '公式卡片＋25题订正' },
+  { date: '2026-08-29', weekday: '周六', week: '第1周', phase: '诊断与基础重建', topic: '计算机组成', task: '复习CPU、指令流水线、存储层次、Cache、I/O；完成40道专题题。', hours: 4, done: true, output: '组成原理错题清单' },
+  { date: '2026-08-30', weekday: '周日', week: '第1周', phase: '诊断与基础重建', topic: '操作系统', task: '复习进程线程、同步互斥、死锁、页式存储、文件系统；完成40题。', hours: 4, done: true, output: '操作系统知识框架' },
+  { date: '2026-08-31', weekday: '周一', week: '第1周', phase: '诊断与基础重建', topic: '编译与程序语言', task: '复习词法/语法分析、正规式、有限自动机、传值与传址；完成25题。', hours: 2, done: true, output: '编译专题错题' },
+  { date: '2026-09-01', weekday: '周二', week: '第1周', phase: '诊断与基础重建', topic: '周复盘', task: '重做本周全部错题；统计上午正确率；列出最弱的3个考点。', hours: 2, done: true, output: '第1周复盘＋弱项Top3' },
+  // 第2周 数据结构与算法
+  { date: '2026-09-02', weekday: '周三', week: '第2周', phase: '数据结构与算法', topic: '线性结构', task: '复习线性表、栈、队列、串；完成30道选择题并写出核心操作复杂度。', hours: 2, done: true, output: '复杂度速查表' },
+  { date: '2026-09-03', weekday: '周四', week: '第2周', phase: '数据结构与算法', topic: '树与二叉树', task: '复习性质、遍历、哈夫曼树、二叉排序树；完成30道选择题。', hours: 2, done: true, output: '树专题错题' },
+  { date: '2026-09-04', weekday: '周五', week: '第2周', phase: '数据结构与算法', topic: '图', task: '复习存储、遍历、最小生成树、最短路径、拓扑排序；完成25题。', hours: 2, done: true, output: '图算法对照表' },
+  { date: '2026-09-05', weekday: '周六', week: '第2周', phase: '数据结构与算法', topic: '查找与排序', task: '复习常见查找/排序算法、稳定性和复杂度；完成45题。', hours: 4, done: true, output: '排序算法对照表' },
+  { date: '2026-09-06', weekday: '周日', week: '第2周', phase: '数据结构与算法', topic: '算法下午题①', task: '完成2道算法填空题；先手工跟踪变量，再核对答案并重写。', hours: 4, done: true, output: '2道完整算法题' },
+  { date: '2026-09-07', weekday: '周一', week: '第2周', phase: '数据结构与算法', topic: '算法下午题②', task: '完成2道不同类型算法题，重点训练循环边界、递归与复杂度分析。', hours: 2, done: true, output: '算法错因归类' },
+  { date: '2026-09-08', weekday: '周二', week: '第2周', phase: '数据结构与算法', topic: '周测与复盘', task: '完成数据结构专题计时测试；正确率目标65%；重做全部错题。', hours: 2, done: true, output: '专题成绩＋复盘' },
+  // 第3周 数据库、网络与安全
+  { date: '2026-09-09', weekday: '周三', week: '第3周', phase: '数据库、网络与安全', topic: '关系模型', task: '复习关系代数、候选键、函数依赖；完成30道选择题。', hours: 2, done: true, output: '关系代数规则卡' },
+  { date: '2026-09-10', weekday: '周四', week: '第3周', phase: '数据库、网络与安全', topic: '规范化', task: '复习1NF至BCNF、无损连接与依赖保持；完成25道规范化题。', hours: 2, done: true, output: '范式判断流程' },
+  { date: '2026-09-11', weekday: '周五', week: '第3周', phase: '数据库、网络与安全', topic: 'SQL与事务', task: '复习连接、子查询、聚合、视图、事务与并发控制；完成30题。', hours: 2, done: true, output: 'SQL易错点清单' },
+  { date: '2026-09-12', weekday: '周六', week: '第3周', phase: '数据库、网络与安全', topic: '数据库设计题', task: '完整完成2道数据库下午题：ER图、关系模式、主外键和SQL。', hours: 4, done: true, output: '2道数据库设计题' },
+  { date: '2026-09-13', weekday: '周日', week: '第3周', phase: '数据库、网络与安全', topic: '网络基础', task: '复习OSI/TCP-IP、地址与子网、常用协议、网络设备；完成40题。', hours: 4, done: true, output: '协议与端口卡片' },
+  { date: '2026-09-14', weekday: '周一', week: '第3周', phase: '数据库、网络与安全', topic: '信息安全', task: '复习加密、摘要、数字签名、认证、网络攻击与防护；完成30题。', hours: 2, done: true, output: '安全机制对照表' },
+  { date: '2026-09-15', weekday: '周二', week: '第3周', phase: '数据库、网络与安全', topic: '周测与复盘', task: '数据库专题测试，正确率目标70%；独立重做1套数据库设计题。', hours: 2, done: true, output: '专题成绩＋复盘' },
+  // 第4周 软件工程与首次计时
+  { date: '2026-09-16', weekday: '周三', week: '第4周', phase: '软件工程与首次计时', topic: '开发模型与需求', task: '复习瀑布、增量、螺旋、敏捷、需求分类与可行性；完成30题。', hours: 2, done: true, output: '模型适用场景表' },
+  { date: '2026-09-17', weekday: '周四', week: '第4周', phase: '软件工程与首次计时', topic: '设计与测试', task: '复习内聚耦合、白盒/黑盒测试、McCabe复杂度、维护；完成35题。', hours: 2, done: false, output: '测试方法对照表' },
+  { date: '2026-09-18', weekday: '周五', week: '第4周', phase: '软件工程与首次计时', topic: '质量与项目管理', task: '复习质量特性、估算、进度、风险；完成25题并整理公式。', hours: 2, done: false, output: '项目管理公式卡' },
+  { date: '2026-09-19', weekday: '周六', week: '第4周', phase: '软件工程与首次计时', topic: '计时上午卷', task: '120分钟完成一套上午卷；剩余时间逐题标注把握度；目标48分。', hours: 4, done: false, output: '上午计时成绩' },
+  { date: '2026-09-20', weekday: '周日', week: '第4周', phase: '软件工程与首次计时', topic: '计时下午卷', task: '120分钟完成一套下午卷；按题型分配时间；目标42分。', hours: 4, done: false, output: '下午计时成绩' },
+  { date: '2026-09-21', weekday: '周一', week: '第4周', phase: '软件工程与首次计时', topic: '知识产权与标准化', task: '复习著作权、专利、商业秘密、标准分类；完成25题。', hours: 2, done: false, output: '法规记忆卡' },
+  { date: '2026-09-22', weekday: '周二', week: '第4周', phase: '软件工程与首次计时', topic: '计时卷复盘', task: '重做计时卷全部错题；记录知识、混淆、计算、时间四类原因。', hours: 2, done: false, output: '第4周复盘' },
+  // 第5周 下午题专项
+  { date: '2026-09-23', weekday: '周三', week: '第5周', phase: '下午题专项', topic: '数据流图', task: '完成2道DFD题；训练外部实体、加工、数据存储和数据流判断。', hours: 2, done: false, output: 'DFD答题模板' },
+  { date: '2026-09-24', weekday: '周四', week: '第5周', phase: '下午题专项', topic: '数据库设计', task: '完成2道数据库设计题；规范写出实体、联系、键及关系模式。', hours: 2, done: false, output: '数据库答题模板' },
+  { date: '2026-09-25', weekday: '周五', week: '第5周', phase: '下午题专项', topic: 'UML基础', task: '复习用例图、类图、顺序图、状态图；完成2道UML题。', hours: 2, done: false, output: 'UML关系速查表' },
+  { date: '2026-09-26', weekday: '周六', week: '第5周', phase: '下午题专项', topic: '结构化分析强化', task: '再完成DFD与数据库题各2道；只看题干独立作答后再订正。', hours: 4, done: false, output: '4道专项题' },
+  { date: '2026-09-27', weekday: '周日', week: '第5周', phase: '下午题专项', topic: '面向对象分析', task: '完成3道UML/面向对象题；训练多重度、关系和职责判断。', hours: 4, done: false, output: '3道专项题' },
+  { date: '2026-09-28', weekday: '周一', week: '第5周', phase: '下午题专项', topic: '术语与步骤整理', task: '把DFD、数据库、UML三类题压缩为一页答题步骤和规范术语。', hours: 2, done: false, output: '下午题模板一页纸' },
+  { date: '2026-09-29', weekday: '周二', week: '第5周', phase: '下午题专项', topic: '周测与复盘', task: '混合完成三类下午题各1道，单题控制在30分钟内。', hours: 2, done: false, output: '3道限时题＋复盘' },
+  // 第6周 算法、模式与首次连考
+  { date: '2026-09-30', weekday: '周三', week: '第6周', phase: '算法、模式与首次连考', topic: '算法强化', task: '完成2道算法题，标注关键循环、递归出口和复杂度。', hours: 2, done: false, output: '算法解题检查表' },
+  { date: '2026-10-01', weekday: '周四', week: '第6周', phase: '算法、模式与首次连考', topic: '设计模式①', task: '复习创建型与结构型模式：意图、角色、适用场景；完成25题。', hours: 2, done: false, output: '模式对照卡①' },
+  { date: '2026-10-02', weekday: '周五', week: '第6周', phase: '算法、模式与首次连考', topic: '设计模式②', task: '复习行为型模式；完成25题并识别题干关键词。', hours: 2, done: false, output: '模式对照卡②' },
+  { date: '2026-10-03', weekday: '周六', week: '第6周', phase: '算法、模式与首次连考', topic: '首次240分钟连考', task: '连续完成上午与下午两科，模拟机考节奏；两科目标均50分。', hours: 4, done: false, output: '完整模考成绩' },
+  { date: '2026-10-04', weekday: '周日', week: '第6周', phase: '算法、模式与首次连考', topic: '完整复盘', task: '按四类错因复盘整卷；重做所有错题；列出失分最高3专题。', hours: 4, done: false, output: '模考复盘＋弱项Top3' },
+  { date: '2026-10-05', weekday: '周一', week: '第6周', phase: '算法、模式与首次连考', topic: 'Java选做题', task: '完成3道Java代码/设计模式题；复习继承、多态、接口和集合。', hours: 2, done: false, output: '3道Java选做题' },
+  { date: '2026-10-06', weekday: '周二', week: '第6周', phase: '算法、模式与首次连考', topic: '上午查漏', task: '针对弱项Top3各完成15道题；更新考点地图熟练度。', hours: 2, done: false, output: '45道弱项题' },
+  // 第7周 真题整卷冲刺
+  { date: '2026-10-07', weekday: '周三', week: '第7周', phase: '真题整卷冲刺', topic: '高频错题回炉', task: '重做累计错题中出现两次以上的题；完善一页公式表。', hours: 2, done: false, output: '高频错题清零表' },
+  { date: '2026-10-08', weekday: '周四', week: '第7周', phase: '真题整卷冲刺', topic: '下午题速度训练', task: 'DFD、数据库、UML各做1题，每题限时25—30分钟。', hours: 2, done: false, output: '3道限时下午题' },
+  { date: '2026-10-09', weekday: '周五', week: '第7周', phase: '真题整卷冲刺', topic: '模考准备', task: '快速复习弱项Top3；确定连考时间分配和标记题策略。', hours: 2, done: false, output: '模考时间策略' },
+  { date: '2026-10-10', weekday: '周六', week: '第7周', phase: '真题整卷冲刺', topic: '完整模考②', task: '240分钟连续完成一套近年真题；目标两科均52分。', hours: 4, done: false, output: '模考②成绩' },
+  { date: '2026-10-11', weekday: '周日', week: '第7周', phase: '真题整卷冲刺', topic: '模考②复盘', task: '只复盘失分与犹豫题；为每个错误写下一句防错规则。', hours: 2, done: false, output: '防错规则清单' },
+  { date: '2026-10-12', weekday: '周一', week: '第7周', phase: '真题整卷冲刺', topic: '完整模考③', task: '240分钟连续完成另一套真题；目标两科均52分。', hours: 4, done: false, output: '模考③成绩' },
+  { date: '2026-10-13', weekday: '周二', week: '第7周', phase: '真题整卷冲刺', topic: '模考③复盘', task: '比较两次模考，锁定最后一周仅需处理的3个问题。', hours: 2, done: false, output: '最终弱项Top3' },
+  // 第8周 最终稳定与收口
+  { date: '2026-10-14', weekday: '周三', week: '第8周', phase: '最终稳定与收口', topic: '最终模考①', task: '240分钟完成整卷；严格模拟连考；目标两科均55分。', hours: 4, done: false, output: '最终模考①成绩' },
+  { date: '2026-10-15', weekday: '周四', week: '第8周', phase: '最终稳定与收口', topic: '模考①复盘', task: '重做错题，补最弱的1个上午专题和1类下午题。', hours: 2, done: false, output: '两项补强结果' },
+  { date: '2026-10-16', weekday: '周五', week: '第8周', phase: '最终稳定与收口', topic: '模板与公式核对', task: '快速检查公式、范式、模式、UML关系和下午题答题模板。', hours: 1.5, done: false, output: '最终速记清单' },
+  { date: '2026-10-17', weekday: '周六', week: '第8周', phase: '最终稳定与收口', topic: '最终模考②', task: '240分钟完成整卷；目标两科均55分且无时间不足。', hours: 4, done: false, output: '最终模考②成绩' },
+  { date: '2026-10-18', weekday: '周日', week: '第8周', phase: '最终稳定与收口', topic: '模考②复盘', task: '只处理会做但失分的问题；停止扩展新知识。', hours: 2, done: false, output: '临场防错清单' },
+  { date: '2026-10-19', weekday: '周一', week: '第8周', phase: '最终稳定与收口', topic: '最终模考③', task: '完成最后一次240分钟连考；验证分数和时间稳定性。', hours: 4, done: false, output: '最终模考③成绩' },
+  { date: '2026-10-20', weekday: '周二', week: '第8周', phase: '最终稳定与收口', topic: '学习截止日', task: '30分钟查看错题Top10和考试物品清单；之后进入轻量复习。', hours: 0.5, done: false, output: '冲刺阶段完成确认' },
+  // 考前
+  { date: '2026-10-21', weekday: '周三', week: '考前', phase: '轻量复习/考试', topic: '错题Top10', task: '查看最常错的10个知识点，重述正确判断规则；不再刷整套题。', hours: 1, done: false, output: '保持状态或完成考试' },
+  { date: '2026-10-22', weekday: '周四', week: '考前', phase: '轻量复习/考试', topic: '公式与模式', task: '复习计算公式、范式、常见设计模式和UML关系。', hours: 1, done: false, output: '保持状态或完成考试' },
+  { date: '2026-10-23', weekday: '周五', week: '考前', phase: '轻量复习/考试', topic: '考前准备', task: '确认准考证时间地点、证件和路线；只看答题模板，提前休息。', hours: 0.5, done: false, output: '保持状态或完成考试' },
+  { date: '2026-10-24', weekday: '周六', week: '考前', phase: '轻量复习/考试', topic: '考试窗口', task: '若今天考试：按准考证赴考；若未考试：30分钟轻复习并保持作息。', hours: 0.5, done: false, output: '保持状态或完成考试' },
+  { date: '2026-10-25', weekday: '周日', week: '考前', phase: '轻量复习/考试', topic: '考试窗口', task: '若今天考试：按准考证赴考；若未考试：30分钟轻复习并保持作息。', hours: 0.5, done: false, output: '保持状态或完成考试' },
+  { date: '2026-10-26', weekday: '周一', week: '考前', phase: '轻量复习/考试', topic: '考试窗口', task: '若今天考试：按准考证赴考；若未考试：30分钟轻复习并保持作息。', hours: 0.5, done: false, output: '保持状态或完成考试' },
+  { date: '2026-10-27', weekday: '周二', week: '考前', phase: '轻量复习/考试', topic: '考试窗口', task: '若今天考试：按准考证赴考；考试结束后停止学习并记录复盘。', hours: 0.5, done: false, output: '保持状态或完成考试' }
+];
