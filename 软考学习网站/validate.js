@@ -73,7 +73,7 @@ for (const f of files) {
 const lessonDates = new Set(files.map(f => f.match(/(\d{4}-\d{2}-\d{2})/)[1]));
 const missing = [];
 meta.forEach(d => {
-  if (d.date >= '2026-09-17' && d.date <= '2026-10-13' && !lessonDates.has(d.date)) missing.push(d.date);
+  if (d.date >= '2026-09-17' && d.date <= '2026-10-27' && !lessonDates.has(d.date)) missing.push(d.date);
 });
 if (missing.length) { console.log('[WARN] days without lesson file: ' + missing.join(', ')); }
 
