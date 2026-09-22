@@ -152,14 +152,66 @@ button { font-family: inherit; }
 .tab:hover { text-decoration: none; border-color: #c4cfe6; }
 .tab.active { background: var(--primary); border-color: var(--primary); color: #fff; }
 
-/* ============ 讲义 ============ */
-.toc-card { background: #fbfcff; }
-.toc-title { font-weight: 700; margin-bottom: 8px; font-size: 14.5px; }
-.toc-list { margin: 0; padding-left: 20px; columns: 2; column-gap: 34px; font-size: 13.5px; }
-.toc-list li { margin: 3px 0; break-inside: avoid; }
-.toc-list li.toc-sub { margin-left: 14px; color: var(--muted); font-size: 12.8px; }
-.toc-list li a { color: #3d4a68; cursor: pointer; }
-.toc-list li a:hover { color: var(--primary); text-decoration: underline; }
+/* ============ 讲义目录（宽屏悬停右侧，窄屏收进悬浮按钮） ============ */
+.toc-aside {
+  display: none;
+  background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+  padding: 14px 14px 16px; box-shadow: 0 1px 2px rgba(20, 30, 60, .04);
+}
+.toc-title {
+  font-weight: 700; margin-bottom: 8px; font-size: 14.5px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.toc-close {
+  display: none; cursor: pointer; color: var(--muted); font-size: 20px;
+  line-height: 1; padding: 0 6px; user-select: none;
+}
+.toc-close:hover { color: var(--text); }
+.toc-list { margin: 0; padding-left: 0; list-style: none; font-size: 13.2px; }
+.toc-list li { margin: 1px 0; }
+.toc-list li a {
+  display: block; padding: 4px 8px 4px 12px; border-left: 2px solid var(--border);
+  border-radius: 0 6px 6px 0; color: #3d4a68; cursor: pointer; line-height: 1.5;
+}
+.toc-list li a:hover { background: #f2f6ff; color: var(--primary); text-decoration: none; }
+.toc-list li.toc-sub a { padding-left: 26px; font-size: 12.6px; color: var(--muted); border-left-color: transparent; }
+.toc-list li a.active {
+  border-left-color: var(--primary); background: var(--primary-light);
+  color: var(--primary-dark); font-weight: 600;
+}
+.toc-fab {
+  position: fixed; right: 18px; bottom: 22px; z-index: 60;
+  display: inline-flex; align-items: center; gap: 7px;
+  border: none; border-radius: 999px; cursor: pointer;
+  background: var(--primary); color: #fff; font-size: 14px; font-weight: 700;
+  padding: 11px 18px; box-shadow: 0 6px 20px rgba(30, 79, 214, .35);
+  transition: background .15s, transform .15s;
+}
+.toc-fab:hover { background: var(--primary-dark); }
+.toc-fab:active { transform: scale(.96); }
+.toc-fab .fab-ico { font-size: 15px; line-height: 1; }
+
+/* 窄屏（含移动端）：目录收进悬浮按钮，点击展开浮层 */
+@media (max-width: 1199px) {
+  .toc-aside.open {
+    display: block; position: fixed; right: 16px; bottom: 84px;
+    width: 82vw; max-width: 340px; max-height: min(62vh, 520px); overflow-y: auto;
+    z-index: 70; box-shadow: 0 10px 36px rgba(15, 25, 55, .22);
+  }
+  .toc-aside.open .toc-close { display: block; }
+}
+
+/* 宽屏（PC）：目录悬停在讲义右侧并随滚动高亮 */
+@media (min-width: 1200px) {
+  .content-wrap.has-toc { max-width: 1200px; }
+  .lecture-row { display: grid; grid-template-columns: minmax(0, 1fr) 244px; gap: 34px; align-items: start; }
+  .toc-aside, .toc-aside.open {
+    display: block; position: sticky; top: 18px; right: auto; bottom: auto;
+    width: auto; max-height: calc(100vh - 36px); overflow-y: auto;
+    box-shadow: 0 1px 2px rgba(20, 30, 60, .04);
+  }
+  .toc-fab { display: none; }
+}
 
 .lecture { font-size: 15px; }
 .lecture h2 {
@@ -340,7 +392,7 @@ button { font-family: inherit; }
   .m-nav { display: block; }
   .stat-row { grid-template-columns: repeat(2, 1fr); }
   .result-grid { grid-template-columns: 1fr; }
-  .toc-list { columns: 1; }
+  .lecture-row { padding-bottom: 60px; }
 }
 
 /* ============ 填空题 ============ */

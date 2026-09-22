@@ -229,7 +229,7 @@
     else practiceChip = '<span class="chip gray">内容待生成</span>';
 
     $('#main').innerHTML = '' +
-      '<div class="content-wrap">' +
+      '<div class="' + (tab === 'lecture' ? 'content-wrap has-toc' : 'content-wrap') + '">' +
       mNavHTML(date) +
       '<div class="card day-head">' +
       '<div class="top">' +
@@ -266,6 +266,7 @@
       stopTimer(); curPractice = null;
       box.innerHTML = renderLecture(date);
       window.scrollTo(0, 0);
+      tocSpy();
     } else {
       var qz = (lesson.quiz && lesson.quiz.questions) ? lesson.quiz.questions : [];
       if (!qz.length) {
@@ -298,14 +299,45 @@
       h.id = id;
       toc.push({ id: id, sub: h.tagName === 'H3', text: (h.textContent || '').replace(/\s+/g, ' ').trim() });
     });
-    var tocHTML = '';
-    if (toc.length) {
-      tocHTML = '<div class="card toc-card"><div class="toc-title">本讲目录</div><ol class="toc-list">' +
-        toc.map(function (t) {
-          return '<li' + (t.sub ? ' class="toc-sub"' : '') + '><a data-act="toc" data-target="' + t.id + '">' + esc(t.text) + '</a></li>';
-        }).join('') + '</ol></div>';
-    }
-    return '<div class="lecture">' + tocHTML + tmp.innerHTML + '</div>';
+    if (!toc.length) return '<div class="lecture">' + tmp.innerHTML + '</div>';
+    var tocHTML =
+      '<aside class="toc-aside" id="toc-aside">' +
+      '<div class="toc-title"><span>本讲目录</span><span class="toc-close" data-act="toc-close" title="收起目录">&#215;</span></div>' +
+      '<ol class="toc-list">' +
+      toc.map(function (t) {
+        return '<li' + (t.sub ? ' class="toc-sub"' : '') + '><a data-act="toc" data-target="' + t.id + '">' + esc(t.text) + '</a></li>';
+      }).join('') + '</ol></aside>' +
+      '<button class="toc-fab" data-act="toc-fab"><span class="fab-ico">&#9776;</span>目录</button>';
+    return '<div class="lecture lecture-row">' +
+      '<div class="lecture-main">' + tmp.innerHTML + '</div>' +
+      tocHTML +
+      '</div>';
+  }
+
+  /* ---------------- 讲义目录定位（滚动高亮当前小节） ---------------- */
+  var tocRaf = false;
+  function tocSpy() {
+    var aside = $('#toc-aside');
+    if (!aside) return;
+    var links = aside.querySelectorAll('a[data-act="toc"]');
+    if (!links.length) return;
+    var docTop = window.scrollY || document.documentElement.scrollTop;
+    var line = docTop + 150;
+    var pairs = [];
+    Array.prototype.forEach.call(links, function (a) {
+      var t = document.getElementById(a.getAttribute('data-target'));
+      if (t) pairs.push({ a: a, top: t.getBoundingClientRect().top + docTop });
+    });
+    if (!pairs.length) return;
+    var cur = null;
+    for (var i = 0; i < pairs.length; i++) if (pairs[i].top <= line) cur = pairs[i].a;
+    if (!cur && window.innerHeight + docTop >= document.documentElement.scrollHeight - 4) cur = pairs[pairs.length - 1].a;
+    Array.prototype.forEach.call(links, function (a) { a.classList.toggle('active', a === cur); });
+  }
+  function tocOnScroll() {
+    if (tocRaf) return;
+    tocRaf = true;
+    requestAnimationFrame(tocSpy);
   }
 
   /* ---------------- 练习 ---------------- */
@@ -546,6 +578,11 @@
   }
 
   function onDocClick(e) {
+    var aside = $('#toc-aside');
+    if (aside && aside.classList.contains('open') &&
+      !e.target.closest('#toc-aside') && !e.target.closest('.toc-fab')) {
+      aside.classList.remove('open');
+    }
     var el = e.target.closest('[data-act]');
     if (!el) return;
     var act = el.getAttribute('data-act');
@@ -586,6 +623,15 @@
     if (act === 'toc') {
       var t = document.getElementById(el.getAttribute('data-target'));
       if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      if (aside && aside.classList.contains('open')) aside.classList.remove('open');
+      return;
+    }
+    if (act === 'toc-fab') {
+      if (aside) aside.classList.toggle('open');
+      return;
+    }
+    if (act === 'toc-close') {
+      if (aside) aside.classList.remove('open');
       return;
     }
     if (act === 'filter') {
@@ -640,6 +686,7 @@
     renderSidebar();
     route();
     window.addEventListener('hashchange', route);
+    window.addEventListener('scroll', tocOnScroll, { passive: true });
     document.addEventListener('click', onDocClick);
     document.addEventListener('change', function (e) {
       if (e.target && e.target.id === 'm-select' && e.target.value) {
