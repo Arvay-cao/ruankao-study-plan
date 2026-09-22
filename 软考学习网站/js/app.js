@@ -634,6 +634,10 @@
       if (aside) aside.classList.remove('open');
       return;
     }
+    if (act === 'back-top') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
     if (act === 'filter') {
       var mode = el.getAttribute('data-mode');
       var list = $('#result-list');
@@ -675,6 +679,14 @@
     if (act === 'modal-cancel') { hideModal(); return; }
   }
 
+  /* ---------------- 回到顶部按钮显隐 ---------------- */
+  function backTopOnScroll() {
+    var btn = $('#back-top');
+    if (!btn) return;
+    var y = window.scrollY || document.documentElement.scrollTop;
+    btn.classList.toggle('show', y > 400);
+  }
+
   function init() {
     var today = todayStr();
     DAYS.forEach(function (d) { if (d.date === today) openWeeks[d.week] = true; });
@@ -687,6 +699,8 @@
     route();
     window.addEventListener('hashchange', route);
     window.addEventListener('scroll', tocOnScroll, { passive: true });
+    window.addEventListener('scroll', backTopOnScroll, { passive: true });
+    backTopOnScroll();
     document.addEventListener('click', onDocClick);
     document.addEventListener('change', function (e) {
       if (e.target && e.target.id === 'm-select' && e.target.value) {

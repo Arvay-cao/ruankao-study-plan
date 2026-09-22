@@ -213,6 +213,22 @@ button { font-family: inherit; }
   .toc-fab { display: none; }
 }
 
+/* 回到顶部悬浮按钮：窄屏位于目录悬浮按钮上方，宽屏（目录按钮隐藏）贴右下角 */
+.back-top {
+  position: fixed; right: 18px; bottom: 84px; z-index: 60;
+  width: 42px; height: 42px; border: none; border-radius: 50%;
+  cursor: pointer; background: var(--primary); color: #fff;
+  font-size: 19px; line-height: 1; box-shadow: 0 6px 20px rgba(30, 79, 214, .35);
+  opacity: 0; visibility: hidden; transform: translateY(10px);
+  transition: opacity .2s, transform .2s, visibility .2s, background .15s;
+}
+.back-top.show { opacity: 1; visibility: visible; transform: none; }
+.back-top:hover { background: var(--primary-dark); }
+.back-top:active { transform: scale(.94); }
+@media (min-width: 1200px) {
+  .back-top { bottom: 22px; }
+}
+
 .lecture { font-size: 15px; }
 .lecture h2 {
   font-size: 20px; margin: 34px 0 12px; padding: 6px 0 6px 12px;
